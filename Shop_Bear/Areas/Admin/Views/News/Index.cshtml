@@ -162,6 +162,7 @@
                 }
             }
         });
+
         $(document).ready(function () {
             $('body').on('change', '#SelectAll', function () {
                 var checkStatus = this.checked;
@@ -180,7 +181,7 @@
                 var conf = confirm('Bạn có muốn xóa tin này không')
                 if (conf === true) {
                     $.ajax({
-                        url: '/admin/news/delete',
+                        url: '/admin/products/delete',
                         type: 'POST',
                         data: { id: id },
                         success: function (rs) {

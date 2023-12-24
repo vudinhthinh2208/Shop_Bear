@@ -1,8 +1,150 @@
-﻿
+﻿@model IEnumerable<Shop_Bear.Models.EF.ProductImage>
 @{
     ViewData["Title"] = "Ảnh sản phẩm";
     Layout = "~/Areas/Admin/Views/Shared/_LayoutEmpty.cshtml";
 }
+<style>
+    .glImage {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+    }
 
-<h1>Hêlo</h1>
+        .glImage li {
+            display: inline-block;
+            position: relative;
+            margin-right: 20px; /* Add some spacing between images */
+            margin-bottom: 20px; /* Add some spacing below images */
+        }
 
+    .box-btn {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+        .box-btn a {
+            margin: 0 5px; /* Add some spacing between buttons */
+        }
+
+    .card {
+        padding: 20px; /* Add padding to the card for spacing */
+    }
+</style>
+<!-- Main content -->
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Ảnh sản phẩm</h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-danger" title="Collapse">
+                    Xóa hết
+                </button>
+                <input type="button" class="btn btn-success" value="Tải ảnh" onclick="BrowseServer('txtImage');" />
+
+            </div>
+        </div>
+        <div class="card-body">
+            <ul class="glImage">
+                @if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <li id="trow_@item.Id">
+                            <img src="@item.Image" width="200px" />
+                            <div class="box-btn">
+                                <a href="#" data-id="@item.Id" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                <a href="#" data-id="@item.Id" class="btn btn-sm btn-success"><i class="fa fa-check"></i></a>
+                            </div>
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            <!-- Footer content here if needed -->
+        </div>
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+</section>
+<!-- /.content -->
+@section Scripts {
+    @{
+
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    <script>
+                ClassicEditor
+                    .create(document.querySelector('#editor'), {
+                        ckfinder: {
+                            uploadUrl: '/ckfinder/core/connector/aspx?command=QuickUpload&type=Files&responseType=json'
+                        },
+                        toolbar: ['ckfinder', 'imageUpload', '|', 'heading', '|', 'bold', 'italic', '|', 'undo', 'redo']
+                    })
+                    .then(editor => {
+                        console.log('Editor was initialized', editor);
+                    })
+                    .catch(error => {
+                        console.error(error.stack);
+                    });
+    </script>
+    <script>
+                function BrowseServer(field) {
+                    CKFinder.modal({
+                        chooseFiles: true,
+                        width: 800,
+                        height: 600,
+                        onInit: function (finder) {
+                            finder.on('files:choose', function (evt) {
+                                var file = evt.data.files.first();
+                                document.getElementById(field).value = file.getUrl();
+                            });
+
+                            finder.on('file:choose:resizedImage', function (evt) {
+                                var file = evt.data.resizedUrl;
+                                document.getElementById(field).value = file;
+                            });
+                        }
+                    });
+                }
+    </script>
+    }
+    }
+<script>
+    function AddImage(id, url) {
+        $.ajax({
+            url: '/admin/productimage/delete',
+            type: 'POST',
+            data: { productId: id, url: url },
+            success: function (rs) {
+                if (rs.success) {
+
+                }
+            }
+        });
+    }
+    $(document).ready(function () {
+        $('body').on('click', '.btnDelete', function () {
+            var id = $(this).data('id');
+            var conf = confirm('Bạn có muốn xóa ảnh này ?');
+            if (conf === true) {
+                $.ajax({
+                    url: '/admin/productimage/delete',
+                    type: 'POST',
+                    data: {id: id},
+                    success: function (rs) {
+                        if (rs.success) {
+                            $('#trow_' + id).remoce();
+                        }
+                    }
+                });
+            }
+        });
+    });
+</script>
