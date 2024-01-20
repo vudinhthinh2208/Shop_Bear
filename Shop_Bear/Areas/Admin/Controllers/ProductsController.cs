@@ -44,6 +44,7 @@ namespace Shop_Bear.Areas.Admin.Controllers
             ViewBag.ProductCategory = new SelectList(_context.ProductCategories.ToList(), "Id", "Title");
             return View();
         }
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Add(Product model, List<string> Images, List<int> rDefault)
@@ -128,5 +129,61 @@ namespace Shop_Bear.Areas.Admin.Controllers
 			}
 			return Json(new { success = false });
 		}
-	}
+        [HttpPost]
+        public ActionResult IsActive(int id)
+        {
+            var item = _context.Products.Find(id);
+            if (item != null)
+            {
+                item.IsActive = !item.IsActive;
+                _context.Entry(item).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+                _context.SaveChanges();
+                return Json(new { success = true, isActive = item.IsActive });
+            }
+            return Json(new { success = false });
+        }
+        [HttpPost]
+        public ActionResult IsHome(int id)
+        {
+            var item = _context.Products.Find(id);
+            if (item != null)
+            {
+                item.IsHome = !item.IsHome;
+                _context.Entry(item).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+                _context.SaveChanges();
+                return Json(new { success = true, isHome = item.IsHome });
+            }
+            return Json(new { success = false });
+        }
+        [HttpPost]
+        public ActionResult IsSale(int id)
+        {
+            var item = _context.Products.Find(id);
+            if (item != null)
+            {
+                item.IsSale = !item.IsSale;
+                _context.Entry(item).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+                _context.SaveChanges();
+                return Json(new { success = true, isSale = item.IsSale });
+            }
+            return Json(new { success = false });
+        }
+        [HttpPost]
+        public ActionResult IsHot(int id)
+        {
+            var item = _context.Products.Find(id);
+            if (item != null)
+            {
+                item.IsHot = !item.IsHot;
+                _context.Entry(item).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+
+                _context.SaveChanges();
+                return Json(new { success = true, IsHot = item.IsHot });
+            }
+            return Json(new { success = false });
+        }
+    }
 }

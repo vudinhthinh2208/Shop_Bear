@@ -115,15 +115,15 @@
 											</div>
 										</div>
 										<div class="row">
-											<div class="col-3">
+											<div class="col-4">
 												<div class="form-group">
 													<div class="custom-control custom-checkbox">
 														@Html.CheckBoxFor(x => x.IsActive, new { @class = "custom-control-input", @id = "customCheckbox2", @checked = "checked" })
-														<label for="customCheckbox2" class="custom-control-label">Hiển thị</label>
+														<label for="customCheckbox2" class="custom-control-label">Trạng thái</label>
 													</div>
 												</div>
 											</div>
-											<div class="col-3">
+											<div class="col-4">
 												<div class="form-group">
 													<div class="custom-control custom-checkbox">
 														@Html.CheckBoxFor(x => x.IsHot, new { @class = "custom-control-input", @id = "IsHotCheckbox2" })
@@ -131,7 +131,7 @@
 													</div>
 												</div>
 											</div>
-											<div class="col-3">
+											<div class="col-4">
 												<div class="form-group">
 													<div class="custom-control custom-checkbox">
 														@Html.CheckBoxFor(x => x.IsFeature, new { @class = "custom-control-input", @id = "IsFeatureCheckbox" })
@@ -139,11 +139,19 @@
 													</div>
 												</div>
 											</div>
-											<div class="col-3">
+											<div class="col-4">
 												<div class="form-group">
 													<div class="custom-control custom-checkbox">
 														@Html.CheckBoxFor(x => x.IsSale, new { @class = "custom-control-input", @id = "IsSaleCheckbox" })
 														<label for="IsSaleCheckbox" class="custom-control-label">Khuyến mãi</label>
+													</div>
+												</div>
+											</div>
+											<div class="col-4">
+												<div class="form-group">
+													<div class="custom-control custom-checkbox">
+														@Html.CheckBoxFor(x => x.IsHome, new { @class = "custom-control-input", @id = "IsHomeCheckbox" })
+														<label for="IsHomeCheckbox" class="custom-control-label">Hiển thị</label>
 													</div>
 												</div>
 											</div>
@@ -331,19 +339,19 @@
 				var str = "";
 				if (currentId == 1) {
 					str += `<tr id="trow_${currentId}">
-																		<td class="text-center">${currentId}</td>
-																		<td class="text-center"><img width="80" src="${url}" /> <input type='hidden' value="${url}" name="Images"/></td>
-																		<td class="text-center"><input type="radio" name="rDefault" value="${currentId}" checked="checked"/></td>
-																		<td class="text-center"><a href="#" data-id="${currentId}" class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td>
-																		</tr>`;
+						<td class="text-center">${currentId}</td>
+						<td class="text-center"><img width="80" src="${url}" /> <input type='hidden' value="${url}" name="Images"/></td>
+						<td class="text-center"><input type="radio" name="rDefault" value="${currentId}" checked="checked"/></td>
+						<td class="text-center"><a href="#" data-id="${currentId}" class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td>
+						</tr>`;
 				}
 				else {
 					str += `<tr id="trow_${currentId}">
-																		<td class="text-center">${currentId}</td>
-																		<td class="text-center"><img width="80" src="${url}" /> <input type='hidden' value="${url}" name="Images"/></td>
-																		<td class="text-center"><input type="radio" name="rDefault" value="${currentId}"/></td>
-																		<td class="text-center"><a href="#" data-id="${currentId}" class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td>
-																		</tr>`;
+						<td class="text-center">${currentId}</td>
+						<td class="text-center"><img width="80" src="${url}" /> <input type='hidden' value="${url}" name="Images"/></td>
+						<td class="text-center"><input type="radio" name="rDefault" value="${currentId}"/></td>
+						<td class="text-center"><a href="#" data-id="${currentId}" class="btn btn-sm btn-danger btnXoaAnh">Xóa</a></td>
+						</tr>`;
 				}
 				$('#tbHtml').append(str);
 				$('#tCurrentId').val(currentId);

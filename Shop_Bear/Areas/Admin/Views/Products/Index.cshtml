@@ -74,7 +74,10 @@
                         <th>Số lượng</th>
                         <th>Giá</th>
                         <th>Ngày tạo</th>
-                        <th>Hiển thị</th>
+                        <th>Trạng Thái</th>
+                        <th>Home</th>
+                        <th>Sale</th>
+                        <th>Hot</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -85,6 +88,10 @@
                         foreach (var item in Model)
                         {
                             var strCheck = item.IsActive ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
+                            var strCheckHome = item.IsHome ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
+                            var strCheckSale = item.IsSale ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
+                            var strCheckHot = item.IsHot ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
+
                             <tr id="trow_@item.Id">
                                 <td><input type="checkbox" class="cbkItem" value="@item.Id" /></td>
                                 <td>@((Model.PageNumber - 1) * Model.PageSize + i)</td>
@@ -97,6 +104,21 @@
                                 <td>
                                     <a href='#' data-id="@item.Id" class="btnActive">
                                         @Html.Raw(strCheck)
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href='#' data-id="@item.Id" class="btnHome">
+                                        @Html.Raw(strCheckHome)
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href='#' data-id="@item.Id" class="btnSale">
+                                        @Html.Raw(strCheckSale)
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href='#' data-id="@item.Id" class="btnHot">
+                                        @Html.Raw(strCheckHot)
                                     </a>
                                 </td>
                                 <td>
@@ -211,7 +233,7 @@
             });
             $('body').on('click', '.btnDelete', function () {
                 var id = $(this).data("id");
-                var conf = confirm('Bạn có muốn xóa tin này không')
+                var conf = confirm('Bạn có muốn sản phẩm này không')
                 if (conf === true) {
                     $.ajax({
                         url: '/admin/products/delete',
@@ -230,7 +252,7 @@
                 var btn = $(this);
                 var id = btn.data("id");
                 $.ajax({
-                    url: '/admin/products/IsActive',
+                    url: '/admin/Products/IsActive',
                     type: 'POST',
                     data: { id: id },
                     success: function (rs) {
@@ -244,11 +266,72 @@
                         }
                     }
                 });
+            });
             $('body').on('click', '.imgproduct', function () {
                 var productId = $(this).data('id'); // Assuming you have a data-id attribute on your image
                 var imageUrl = '@Url.Action("Index", "ProductImage")?productId=' + productId;
             });
-        });
+            $('body').on('click', '.btnHome', function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                var id = btn.data("id");
+                $.ajax({
+                    url: '/admin/Products/IsHome',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            if (rs.isHome) {
+                                btn.html("<i class='fa fa-check text-success'></i>");
+                            }
+                            else {
+                                btn.html("<i class='fas fa-times text-danger'></i>")
+                            }
+                        }
+                    }
+                });
+            });
+            $('body').on('click', '.btnSale', function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                var id = btn.data("id");
+                $.ajax({
+                    url: '/admin/Products/IsSale',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            if (rs.isSale) {
+                                btn.html("<i class='fa fa-check text-success'></i>");
+                            }
+                            else {
+                                btn.html("<i class='fas fa-times text-danger'></i>")
+                            }
+                        }
+                    }
+                });
+            });
+            $('body').on('click', '.btnHot', function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                var id = btn.data("id");
+                $.ajax({
+                    url: '/admin/Products/IsHot',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            if (rs.isHot) {
+                                btn.html("<i class='fa fa-check text-success'></i>");
+                            }
+                            else {
+                                btn.html("<i class='fas fa-times text-danger'></i>")
+                            }
+                        }
+                    }
+                });
+            });
+
         });
     </script>
 }

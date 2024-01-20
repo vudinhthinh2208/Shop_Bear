@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Shop_Bear.Models.ShoppingCartItem>
+
+@{
+	ViewData["Title"] = "Giỏ Hàng";
+}
+
+<link rel="stylesheet" type="text/css" href="~/assets/styles/categories_styles.css">
+<link rel="stylesheet" type="text/css" href="~/assets/styles/categories_responsive.css">
+
+<div class="container product_section_container">
+	<div class="row">
+		<div class="col product_section clearfix">
+
+			<!-- Breadcrumbs -->
+
+			<div class="breadcrumbs d-flex flex-row align-items-center">
+				<ul>
+					<li><a asp-controller="Home">Home</a></li>
+					<li class="active"><a href="index.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Giỏ Hàng</a></li>
+				</ul>
+			</div>
+
+			<!-- Main Content -->
+
+			<div class="main_content">
+
+				<!-- Products -->
+				<table class="table">
+					<tr>
+						<th>STT</th>
+						<th>Ảnh</th>
+						<th>Tên sản phẩm</th>
+						<th>Giá</th>
+						<th>Số lượng</th>
+						<th></th>
+					</tr>
+					@if(Model!=null && Model.Any())
+					{
+						var i = 0;
+						foreach(var item in Model)
+						{
+							<tr>
+								<td>@(i+1)</td>
+								<td><img src="@item.ProductImg" width="150"/></td>
+								<td>@item.ProductName</td>
+								<td>@item.Price</td>
+								<td>@item.Quantity</td>
+								<td></td>
+							</tr>
+							i++;
+						}
+					}
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+@section scripts {
+	<script src="~/assets/js/categories_custom.js"></script>
+}
+

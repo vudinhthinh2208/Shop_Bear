@@ -34,5 +34,17 @@ namespace Shop_Bear.Areas.Admin.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            var item = _context.ProductCategories.Find(id);
+            if (item != null)
+            {
+                _context.Remove(item);
+                _context.SaveChanges();
+                return Json(new { success = true });
+            }
+            return Json(new { success = false });
+        }
     }
 }

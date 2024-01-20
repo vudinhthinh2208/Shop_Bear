@@ -9,7 +9,8 @@ namespace Shop_Bear.Models
         {
 
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Order>()
                 .Property(o => o.TotalAmount)

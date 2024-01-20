@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Shop_Bear.Models.EF.Category>
+@if (Model != null && Model.Any())
+{
+	@foreach (var item in Model)
+	{
+		<ul class="navbar_menu">
+			<li><a asp-action="Index" asp-controller="@item.Alias" asp-route-Alias="@item.Alias">@item.Title</a></li>
+		</ul>
+	}
+}
