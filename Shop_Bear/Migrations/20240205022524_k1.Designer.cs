@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shop_Bear.Models;
 
@@ -11,9 +12,11 @@ using Shop_Bear.Models;
 namespace Shop_Bear.Migrations
 {
     [DbContext(typeof(ShopBearContext))]
-    partial class ShopBearContextModelSnapshot : ModelSnapshot
+    [Migration("20240205022524_k1")]
+    partial class k1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

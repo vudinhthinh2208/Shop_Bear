@@ -63,16 +63,30 @@
 											<li><a href="#">Spanish</a></li>
 										</ul>
 									</li>
-									<li class="account">
-										<a href="#">
-											My Account
-											<i class="fa fa-angle-down"></i>
-										</a>
-										<ul class="account_selection">
-											<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-											<li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
-										</ul>
-									</li>
+									@if (User.Identity?.IsAuthenticated ?? false)
+									{
+										<li class="account">
+											<a href="#">
+												<i>Hi, @User.Identity.Name</i>
+												<i class="fa fa-angle-down"></i>
+											</a>
+											<ul class="account_selection">
+												<partial name="_LoginPartial" />
+											</ul>
+										</li>
+									}
+									else
+									{
+										<li class="account">
+											<a href="#">
+												My Account
+												<i class="fa fa-angle-down"></i>
+											</a>
+											<ul class="account_selection">
+												<partial name="_LoginPartial" />
+											</ul>
+										</li>
+									}
 								</ul>
 							</div>
 						</div>
@@ -81,6 +95,7 @@
 			</div>
 
 			<!-- Main Navigation -->
+			@Html.Partial("_NotificationPartial")
 
 			<div class="main_nav_container">
 				<div class="container">
@@ -95,11 +110,13 @@
 									<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
 									<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
 									<li class="checkout">
-										<a asp-action="Index" asp-controller="ShoppingCart">
+										<a asp-action="Index" asp-controller="Cart">
 											<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-											<span  id="checkout_items" class="checkout_items">0</span>
+											<span  @* id="checkout_items" *@ class="checkout_items">0</span>
 										</a>
 									</li>
+									
+
 								</ul>
 								<div class="hamburger_container">
 									<i class="fa fa-bars" aria-hidden="true"></i>
@@ -108,84 +125,11 @@
 						</div>
 					</div>
 				</div>
+				
 			</div>
-
+			
 		</header>
-
-		<div class="fs_menu_overlay"></div>
-		<div class="hamburger_menu">
-			<div class="hamburger_close"><i class="fa fa-times" aria-hidden="true"></i></div>
-			<div class="hamburger_menu_content text-right">
-				<ul class="menu_top_nav">
-					<li class="menu_item has-children">
-						<a href="#">
-							usd
-							<i class="fa fa-angle-down"></i>
-						</a>
-						<ul class="menu_selection">
-							<li><a href="#">cad</a></li>
-							<li><a href="#">aud</a></li>
-							<li><a href="#">eur</a></li>
-							<li><a href="#">gbp</a></li>
-						</ul>
-					</li>
-					<li class="menu_item has-children">
-						<a href="#">
-							English
-							<i class="fa fa-angle-down"></i>
-						</a>
-						<ul class="menu_selection">
-							<li><a href="#">French</a></li>
-							<li><a href="#">Italian</a></li>
-							<li><a href="#">German</a></li>
-							<li><a href="#">Spanish</a></li>
-						</ul>
-					</li>
-					<li class="menu_item has-children">
-						<a href="#">
-							My Account
-							<i class="fa fa-angle-down"></i>
-						</a>
-						<ul class="menu_selection">
-							<li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a></li>
-							<li><a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
-						</ul>
-					</li>
-					<li class="menu_item"><a href="#">home</a></li>
-					<li class="menu_item"><a href="#">shop</a></li>
-					<li class="menu_item"><a href="#">promotion</a></li>
-					<li class="menu_item"><a href="#">pages</a></li>
-					<li class="menu_item"><a href="#">blog</a></li>
-					<li class="menu_item"><a href="#">contact</a></li>
-				</ul>
-			</div>
-		</div>
 		@RenderBody()
-
-
-
-		<!-- Newsletter -->
-
-		<div class="newsletter">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-6">
-						<div class="newsletter_text d-flex flex-column justify-content-center align-items-lg-start align-items-md-center text-center">
-							<h4>Newsletter</h4>
-							<p>Subscribe to our newsletter and get 20% off your first purchase</p>
-						</div>
-					</div>
-					<div class="col-lg-6">
-						<form action="post">
-							<div class="newsletter_form d-flex flex-md-row flex-column flex-xs-column align-items-center justify-content-lg-end justify-content-center">
-								<input id="newsletter_email" type="email" placeholder="Your email" required="required" data-error="Valid email is required.">
-								<button id="newsletter_submit" type="submit" class="newsletter_submit_btn trans_300" value="Submit">subscribe</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
 
 		<!-- Footer -->
 
@@ -234,8 +178,8 @@
     <script src="~/assets/plugins/easing/easing.js"></script>
     <script src="~/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
     <script src="~/assets/js/custom.js"></script>
-	<script src="~/assets/js/jsShopping.js"></script>
-
+@* 	<script src="~/assets/js/jsShopping.js"></script>
+ *@
 @* 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

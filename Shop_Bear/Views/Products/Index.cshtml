@@ -156,7 +156,7 @@
 													<div class="product_price">$@item.PriceSale<span>$@item.Price</span></div>
 												</div>
 											</div>
-											<div class="red_button add_to_cart_button"><a href="#">add to cart</a></div>
+											<div class="red_button add_to_cart_button"><a asp-action="Add" asp-controller="Cart" asp-route-Id="@item.Id">add to cart</a></div>
 										</div>
 									}
 								}

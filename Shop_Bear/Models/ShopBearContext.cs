@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Shop_Bear.Models.EF;
 
 namespace Shop_Bear.Models
 {
-    public class ShopBearContext : DbContext
+    public class ShopBearContext : IdentityDbContext<AppUser>
     {
         public ShopBearContext(DbContextOptions options) : base(options)
         {
@@ -46,5 +47,6 @@ namespace Shop_Bear.Models
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<Subscribe> Subscribes { get; set; }
+        public DbSet<ThongKe> ThongKes { get; set; }
 }
 }

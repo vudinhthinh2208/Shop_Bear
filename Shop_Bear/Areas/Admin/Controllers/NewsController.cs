@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Shop_Bear.Models;
 using Shop_Bear.Models.EF;
 using X.PagedList;
@@ -6,7 +7,9 @@ using X.PagedList;
 namespace Shop_Bear.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class NewsController : Controller
+	[Authorize]
+
+	public class NewsController : Controller
     {
         private readonly ShopBearContext _context;
         public NewsController(ShopBearContext context)

@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Shop_Bear.Models;
 using Shop_Bear.Models.EF;
 
 namespace Shop_Bear.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class ProductCategoryController : Controller
+	[Authorize]
+
+	public class ProductCategoryController : Controller
     {
         private readonly ShopBearContext _context;
         public ProductCategoryController(ShopBearContext context)

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Shop_Bear.Models;
 using Shop_Bear.Models.EF;
+using System.Security.Policy;
 
 namespace Shop_Bear.Controllers
 {
@@ -40,7 +41,13 @@ namespace Shop_Bear.Controllers
 					.Include(p => p.ProductCategory)
 					.Where(x => x.Alias == alias)
 					.FirstOrDefault();
-
+			if(productByAlias != null)
+			{
+				_context.Products.Attach(productByAlias);
+				productByAlias.ViewCount = productByAlias.ViewCount + 1;
+				_context.Entry(productByAlias).Property(x => x.ViewCount).IsModified = true;
+				_context.SaveChanges();
+			}
 			return View(productByAlias);
 		}
 	}

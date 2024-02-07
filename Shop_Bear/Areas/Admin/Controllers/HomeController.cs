@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Shop_Bear.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class HomeController : Controller
+	[Authorize]
+
+	public class HomeController : Controller
     {
         
         public IActionResult Index()

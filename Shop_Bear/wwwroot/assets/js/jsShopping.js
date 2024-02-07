@@ -22,6 +22,24 @@
             }
         });
     });
+    $('body').on('click', '.btnDelete', function (e) {
+        e.preventDefault();
+        var id = $(this).data('id');
+        var conf = confirm('Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?');
+        if (conf == true) {
+            $.ajax({
+                url: '/shoppingcart/Delete',
+                type: 'POST',
+                data: { id: id }, // Truyền id đúng cách
+                success: function (rs) {
+                    if (rs.Success) {
+                        $('#checkout_items').html(rs.Count);
+                        $('#trow_' + id).delete();
+                    }
+                }
+            });
+        }
+    });
 });
 
 function ShowCount() {

@@ -1,5 +1,7 @@
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Shop_Bear.Models;
+using Shop_Bear.Models.EF;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +19,22 @@ builder.Services.AddSession(options =>
 	//options.Cookie.HttpOnly = true;
 	options.Cookie.IsEssential = true;
 });
+//Đăng ký Identity
+builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+{
+	options.Password.RequiredUniqueChars = 0;
+	options.Password.RequireUppercase = false;
+	options.Password.RequiredLength = 8;
+	options.Password.RequireLowercase = false;
+})
+	.AddEntityFrameworkStores<ShopBearContext>()
+	.AddDefaultTokenProviders();
+
+
+
+
+
+
 var app = builder.Build();
 app.UseSession();
 
@@ -31,8 +49,8 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
-// Use session
-app.UseAuthorization();
+app.UseAuthentication(); // xác thực trước
+app.UseAuthorization(); // xác thực coi có quyền gì
 
 app.MapControllerRoute(
             name: "areas",

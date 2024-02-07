@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Shop_Bear.Models;
@@ -8,7 +9,8 @@ using X.PagedList;
 namespace Shop_Bear.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class ProductsController : Controller
+	[Authorize]
+	public class ProductsController : Controller
     {
         private readonly ShopBearContext _context;
         public ProductsController(ShopBearContext context)
@@ -77,6 +79,7 @@ namespace Shop_Bear.Areas.Admin.Controllers
 			model.CreateDate = DateTime.Now;
             model.ModifiedDate = DateTime.Now;
             model.Alias = Shop_Bear.Models.Common.Filter.FilterChar(model.Title);
+            model.ViewCount = 0;
             _context.Products.Add(model);
             _context.SaveChanges();
             ViewBag.ProductCategory = new SelectList(_context.ProductCategories.ToList(), "Id", "Title");
@@ -110,6 +113,7 @@ namespace Shop_Bear.Areas.Admin.Controllers
             }
             return Json(new { success = false });
         }
+
 		[HttpPost]
 		public ActionResult DeleteAll(string ids)
 		{
