@@ -31,6 +31,7 @@ namespace Shop_Bear.Models
             modelBuilder.Entity<Product>()
                 .Property(p => p.OriginalPrice)
                 .HasColumnType("decimal(20,3)");
+
             // Các cấu hình khác...
 
             base.OnModelCreating(modelBuilder);

@@ -23,27 +23,7 @@
                         Danh Mục
                     </p>
                 </a>
-@*                 <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="../../index.html" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Dashboard v1</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="../../index2.html" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Dashboard v2</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="../../index3.html" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Dashboard v3</p>
-                        </a>
-                    </li>
-                </ul>
- *@            </li>
+=           </li>
             <li class="nav-item">
                 <a asp-controller="News" asp-action="Index" class="nav-link">
                     <i class="nav-icon fas fa-th"></i>
@@ -112,6 +92,36 @@
                         @* <span class="right badge badge-danger">New</span> *@
                     </p>
                 </a>
+            </li>
+            
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Thống kê
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a asp-controller="Statistical" asp-action="Index" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Ngày
+                            </p>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a asp-controller="Statistical" asp-action="Yearly" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Tháng năm
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+
             </li>
         </ul>
     </nav>
