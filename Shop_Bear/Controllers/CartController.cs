@@ -53,7 +53,6 @@ namespace Shop_Bear.Controllers
 			HttpContext.Session.SetJson("Cart", cart);
 			TempData["success"] = "Item added to cart successfully."; 
 			return Redirect(Request.Headers["Referer"].ToString());
-			//return RedirectToAction("Index");
 		}
 		//Giảm số lượng
 		public async Task<IActionResult> Decrease(int Id)

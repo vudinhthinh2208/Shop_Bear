@@ -71,7 +71,7 @@ namespace Shop_Bear.Controllers
 		{
 			if (!User.Identity.IsAuthenticated)
 			{
-				// Redirect to login page or return unauthorized response
+				// Trả về trang đăng nhập để thực hiện lấy IdUser
 				return RedirectToAction("Login", "Account");
 			}
 

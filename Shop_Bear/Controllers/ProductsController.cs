@@ -20,12 +20,12 @@ namespace Shop_Bear.Controllers
 
 			return View(items);
 		}
-		public ActionResult Partial_ItemsByCateId()
+		public IActionResult Partial_ItemsByCateId()
 		{
 			var items = _context.Products.Where(x => x.IsHome && x.IsActive).Take(5).ToList();
 			return PartialView(items);
 		}
-		public ActionResult Partial_ProductSales()
+		public IActionResult Partial_ProductSales()
 		{
 			var items = _context.Products.Where(x => x.IsSale && x.IsActive).Take(5).ToList();
 			return PartialView(items);

@@ -27,9 +27,6 @@
 				<div class="products_iso">
 					<div class="row">
 						<div class="col">
-
-							
-
 							<div class="product-grid">
 
 								<!-- Product 1 -->
@@ -45,16 +42,14 @@
 											<div class="product discount product_filter">
 												<div class="product_image">
 													<a asp-action="Detail" asp-controller="Products" asp-route-Alias="@item.Product.Alias">
-														<img src="@item.Product.ProductImage.FirstOrDefault(x => x.IsDefault).Image" 
-															 alt="">
+														<img src="@item.Product.ProductImage.FirstOrDefault(x => x.IsDefault).Image" alt="">
 													</a>
 												</div>
-												
 												<div>
 													<form method="post" asp-action="RemoveWishList" asp-controller="WishList">
 														<input type="hidden" name="id" value="@item.ProductId" />
 														<button type="submit" class="favorite favorite_left" title="Add to wishlist" style="border: none; background: none;position: absolute;">
-
+														</button>
 													</form>
 												</div>
 												<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-@saleFormatted%</span></div>
@@ -69,7 +64,6 @@
 									}
 								}
 							</div>
-
 						</div>
 					</div>
 				</div>
