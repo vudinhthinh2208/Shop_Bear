@@ -79,6 +79,25 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                        <label>Ngày thanh toán</label>
+                        
+                            @if (@Model.Status == 1)
+                            {
+                                <p class="form-control">Chưa thanh toán</p>
+                            }
+                            else if (@Model.Status == 2)
+                            {
+                                 <p class="form-control">@Model.DatePayment.ToString("dd/MM/yyyy")</p>
+                            }
+                            else
+                            {
+                                <p class="form-control">Đơn hàng đã hủy</p>
+                            }
+                        
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
                         <label>Trạng thái đơn hàng</label>
                         <p class="form-control">
                             @if (Model.Status == 1)
@@ -86,10 +105,15 @@
                                 <option value="1" selected>Chờ thanh toán</option>
 
                             }
+                            else if (Model.Status == 2)
+                            {
+                                <option value="2" selected>Đã thanh toán</option>
+
+                            }
                             else
                             {
 
-                                <option value="2" selected>Đã thanh toán</option>
+                                <option value="3" selected>Hủy</option>
                             }
                         </p>
                     </div>

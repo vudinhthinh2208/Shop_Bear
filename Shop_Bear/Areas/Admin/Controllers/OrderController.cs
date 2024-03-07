@@ -48,6 +48,7 @@ namespace Shop_Bear.Areas.Admin.Controllers
             var item = _context.Orders.FirstOrDefault(x => x.Id == id);
             if (item != null)
             {
+                item.DatePayment = DateTime.Now;
                 item.Status = trangthai;
                 _context.SaveChanges();
                 return Redirect("Index");

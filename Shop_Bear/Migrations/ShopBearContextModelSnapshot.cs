@@ -449,6 +449,9 @@ namespace Shop_Bear.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("DatePayment")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -791,6 +794,31 @@ namespace Shop_Bear.Migrations
                     b.ToTable("ThongKes");
                 });
 
+            modelBuilder.Entity("Shop_Bear.Models.EF.WishList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("tb_WishList");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -895,6 +923,17 @@ namespace Shop_Bear.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("Shop_Bear.Models.EF.WishList", b =>
+                {
+                    b.HasOne("Shop_Bear.Models.EF.Product", "Product")
+                        .WithMany("WishLists")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("Shop_Bear.Models.EF.Category", b =>
                 {
                     b.Navigation("News");
@@ -912,6 +951,8 @@ namespace Shop_Bear.Migrations
                     b.Navigation("OrderDetails");
 
                     b.Navigation("ProductImage");
+
+                    b.Navigation("WishLists");
                 });
 
             modelBuilder.Entity("Shop_Bear.Models.EF.ProductCategory", b =>

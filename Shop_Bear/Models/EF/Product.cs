@@ -10,6 +10,7 @@ namespace Shop_Bear.Models.EF
         {
             this.ProductImage = new HashSet<ProductImage>();
             this.OrderDetails = new HashSet<OrderDetail>();
+            this.WishLists = new HashSet<WishList>();
         }
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
@@ -40,5 +41,6 @@ namespace Shop_Bear.Models.EF
         public virtual ProductCategory ProductCategory { get; set; }
         public virtual ICollection<ProductImage> ProductImage { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual ICollection<WishList> WishLists { get; set; }
     }
 }

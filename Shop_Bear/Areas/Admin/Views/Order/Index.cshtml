@@ -81,19 +81,27 @@
                                     }
                                 </td>
                                 <td>@item.CreateDate.ToString("dd/MM/yyyy")</td>
+                                
                                 <td>
                                     @if (item.Status == 1)
                                     {
                                         <span>Chờ thanh toán</span>
                                     }
-                                    else
+                                    else if (item.Status == 2)
                                     {
                                         <span>Đã thanh toán</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Hủy</span>
                                     }
                                 </td>
                                 <td>
                                     <a class="btn btn-sm btn-success" asp-action="ViewDetail" asp-controller="Order" asp-route-Id="@item.Id">Chi tiết</a>
-                                    <a class="btn btn-sm btn-danger btnCapNhat" data-id="@item.Id">Cập nhật</a>
+                                    @if(item.Status != 3)
+                                    {
+                                        <a class="btn btn-sm btn-danger btnCapNhat" data-id="@item.Id">Cập nhật</a>
+                                    }
                                 </td>
                             </tr>
                             i++;
@@ -142,6 +150,7 @@
                         <label>Trạng thái</label>
                         <select class="form-control" id="ddTrangThai">
                             <option value="2">Đã thanh toán</option>
+                            <option value="3">Hủy</option>
                         </select>
                     </div>
                 </div>

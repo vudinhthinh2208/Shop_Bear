@@ -23,7 +23,7 @@ namespace Shop_Bear.Models
 			ProductId = product.Id;
 			ProductName = product.Title;
 			Alias = product.Alias;
-			Price = (decimal)product.Price;
+			Price = (decimal)product.PriceSale;
 			Quantity = 1;
 			Image = product.ProductImage.FirstOrDefault(x => x.IsDefault == true).Image ;
 		}

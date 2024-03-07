@@ -11,6 +11,6 @@ namespace Shop_Bear.Repository.Components
 		{
 			_context = context;
 		}
-		public async Task<IViewComponentResult> InvokeAsync() => View(await _context.ProductCategories.ToListAsync());
+		public async Task<IViewComponentResult> InvokeAsync() => View(await _context.ProductCategories.Include(x => x.Products).ToListAsync());
 	}
 }

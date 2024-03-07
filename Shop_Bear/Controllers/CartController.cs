@@ -31,7 +31,7 @@ namespace Shop_Bear.Controllers
 
 			if (product == null)
 			{
-				// Handle the case where the product with the given id is not found.
+				// Nếu không tìm thấy sản phẩm thì trả về giao diện của giỏ hàng
 				TempData["error"] = "Product not found.";
 				return RedirectToAction("Index");
 			}
@@ -41,12 +41,12 @@ namespace Shop_Bear.Controllers
 
 			if (cartItem == null)
 			{
-				// If the item is not in the cart, add it.
+				// Nếu sản phẩm chưa có trong giỏ hàng thì thêm mới nó
 				cart.Add(new CartItemModel(product));
 			}
 			else
 			{
-				// If the item is already in the cart, increase its quantity.
+				// Nếu sản phẩm có trong giỏ hàng thì tăng số lượng sản phẩm đó lên
 				cartItem.Quantity += 1;
 			}
 

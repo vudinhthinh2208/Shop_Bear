@@ -48,9 +48,9 @@
             <h3 class="card-title">Danh Sách Sản Phẩm</h3>
 
             <div class="card-tools">
-                <a asp-controller="Products" asp-action="Add" class="btn btn-primary">+</a>
-                <a asp-controller="Products" asp-action="Add" class="btn btn-danger" id="BtnDeleteAll">Xóa</a>
-            </div>
+                <a asp-controller="Products" asp-action="Add" class="btn btn-primary">Thêm sản phẩm</a>
+@*                 <a asp-controller="Products" asp-action="Add" class="btn btn-danger" id="BtnDeleteAll">Xóa</a>
+ *@            </div>
         </div>
         <div class="card-body">
             <div style="display: flex;justify-content: right;">
@@ -123,8 +123,8 @@
                                 </td>
                                 <td>
                                     <a asp-controller="Products" asp-action="Edit" asp-route-Id="@item.Id" class="btn btn-sm btn-primary">Sửa</a>
-                                    <a data-id="@item.Id" class="btn btn-sm btn-danger btnDelete">Xóa</a>
-                                </td>
+@*                                     <a data-id="@item.Id" class="btn btn-sm btn-danger btnDelete">Xóa</a>
+ *@                                </td>
                             </tr>
                             i++;
                         }

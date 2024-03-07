@@ -14,7 +14,7 @@
 			<div class="breadcrumbs d-flex flex-row align-items-center">
 				<ul>
 					<li><a asp-controller="Home">Home</a></li>
-					<li class="active"><a href="index.html"><i class="fa fa-angle-right" aria-hidden="true"></i>Men's</a></li>
+					<li class="active"><a asp-action="Index" asp-controller="Products"><i class="fa fa-angle-right" aria-hidden="true"></i>Products</a></li>
 				</ul>
 			</div>
 
@@ -23,67 +23,24 @@
 			<div class="sidebar">
 				<div class="sidebar_section">
 					<div class="sidebar_title">
-						<h5>Product Category</h5>
+						<h5>Danh mục</h5>
 					</div>
 					<ul class="sidebar_categories">
-						<li><a href="#">Men</a></li>
-						<li class="active"><a href="#"><span><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>Women</a></li>
-						<li><a href="#">Accessories</a></li>
-						<li><a href="#">New Arrivals</a></li>
-						<li><a href="#">Collection</a></li>
-						<li><a href="#">Shop</a></li>
+						@Html.Partial("_MenuProductCategoryPartial")
 					</ul>
 				</div>
 
-				<!-- Price Range Filtering -->
+				@* <!-- Price Range Filtering -->
 				<div class="sidebar_section">
-					<div class="sidebar_title">
-						<h5>Filter by Price</h5>
-					</div>
-					<p>
-						<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-					</p>
-					<div id="slider-range"></div>
-					<div class="filter_button"><span>filter</span></div>
+				<div class="sidebar_title">
+				<h5>Giá</h5>
 				</div>
-
-				<!-- Sizes -->
-@* 				<div class="sidebar_section">
-					<div class="sidebar_title">
-						<h5>Sizes</h5>
-					</div>
-					<ul class="checkboxes">
-						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>S</span></li>
-						<li class="active"><i class="fa fa-square" aria-hidden="true"></i><span>M</span></li>
-						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>L</span></li>
-						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>XL</span></li>
-						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>XXL</span></li>
-					</ul>
-				</div>
- *@
-				<!-- Color -->
-@* 				<div class="sidebar_section">
-					<div class="sidebar_title">
-						<h5>Color</h5>
-					</div>
-					<ul class="checkboxes">
-						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>Black</span></li>
-						<li class="active"><i class="fa fa-square" aria-hidden="true"></i><span>Pink</span></li>
-						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
-						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
-						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
-						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
-						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
-						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
-						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>White</span></li>
-						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>Blue</span></li>
-						<li><i class="fa fa-square-o" aria-hidden="true"></i><span>Orange</span></li>
-					</ul>
-					<div class="show_more">
-						<span><span>+</span>Show More</span>
-					</div>
-				</div>
- *@
+				<p>
+				<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+				</p>
+				<div id="slider-range"></div>
+				<div class="filter_button"><span>Lọc</span></div>
+				</div>	 *@
 			</div>
 
 			<!-- Main Content -->
@@ -101,16 +58,16 @@
 							<div class="product_sorting_container product_sorting_container_top">
 								<ul class="product_sorting">
 									<li>
-										<span class="type_sorting_text">Default Sorting</span>
+										<span class="type_sorting_text">Tìm kiếm</span>
 										<i class="fa fa-angle-down"></i>
 										<ul class="sorting_type">
-											<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>Default Sorting</span></li>
-											<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span>Price</span></li>
-											<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'><span>Product Name</span></li>
+											<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "original-order" }'><span>Mặc định</span></li>
+											<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "price" }'><span>Giá tăng dần</span></li>
+											<li class="type_sorting_btn" data-isotope-option='{ "sortBy": "name" }'><span>Theo tên</span></li>
 										</ul>
 									</li>
 									<li>
-										<span>Show</span>
+										<span>Hiển thị</span>
 										<span class="num_sorting_text">6</span>
 										<i class="fa fa-angle-down"></i>
 										<ul class="sorting_num">
@@ -120,19 +77,6 @@
 										</ul>
 									</li>
 								</ul>
-								<div class="pages d-flex flex-row align-items-center">
-									<div class="page_current">
-										<span>1</span>
-										<ul class="page_selection">
-											<li><a href="#">1</a></li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-										</ul>
-									</div>
-									<div class="page_total"><span>of</span> 3</div>
-									<div id="next_page" class="page_next"><a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
-								</div>
-
 							</div>
 
 							<!-- Product Grid -->
@@ -140,20 +84,24 @@
 							<div class="product-grid">
 
 								<!-- Product 1 -->
-								@if(Model !=null && Model.Any())
+								@if (Model != null && Model.Any())
 								{
-									foreach(var item in Model)
+									foreach (var item in Model)
 									{
+										var sale = ((@item.Price - @item.PriceSale) * 100) / @item.Price;
+										var saleFormatted = $"{sale:N2}";
+
+
 										<div class="product-item men">
 											<div class="product discount product_filter">
 												<div class="product_image">
-													<img src="@item.ProductImage.FirstOrDefault(x => x.IsDefault).Image" alt="">
+													<a asp-action="Detail" asp-controller="Products" asp-route-Alias="@item.Alias"><img src="@item.ProductImage.FirstOrDefault(x => x.IsDefault).Image" alt=""></a>
 												</div>
 												<div class="favorite favorite_left"></div>
-												<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
+												<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-@saleFormatted%</span></div>
 												<div class="product_info">
-													<h6 class="product_name"><a asp-action="Detail" asp-controller="Products"  asp-route-Alias="@item.Alias">@item.Title</a></h6>
-													<div class="product_price">$@item.PriceSale<span>$@item.Price</span></div>
+													<h6 class="product_name"><a asp-action="Detail" asp-controller="Products" asp-route-Alias="@item.Alias">@item.Title</a></h6>
+													<div class="product_price">@item.PriceSale<span>@item.Price</span></div>
 												</div>
 											</div>
 											<div class="red_button add_to_cart_button"><a asp-action="Add" asp-controller="Cart" asp-route-Id="@item.Id">add to cart</a></div>
@@ -167,7 +115,7 @@
 							<div class="product_sorting_container product_sorting_container_bottom clearfix">
 								<ul class="product_sorting">
 									<li>
-										<span>Show:</span>
+										<span>Hiển thị:</span>
 										<span class="num_sorting_text">04</span>
 										<i class="fa fa-angle-down"></i>
 										<ul class="sorting_num">
@@ -178,20 +126,6 @@
 										</ul>
 									</li>
 								</ul>
-								<span class="showing_results">Showing 1–3 of 12 results</span>
-								<div class="pages d-flex flex-row align-items-center">
-									<div class="page_current">
-										<span>1</span>
-										<ul class="page_selection">
-											<li><a href="#">1</a></li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-										</ul>
-									</div>
-									<div class="page_total"><span>of</span> 3</div>
-									<div id="next_page_1" class="page_next"><a href="#"><i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></div>
-								</div>
-
 							</div>
 
 						</div>
@@ -201,6 +135,8 @@
 		</div>
 	</div>
 </div>
-@section scripts{
+
+@*  Nếu sảy ra hiện tượng lỗi layout hoặc hình ảnh thì do nó chưa truy cập được phần scripts *@
+@section scripts {
 	<script src="~/assets/js/categories_custom.js"></script>
 }

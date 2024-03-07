@@ -13,11 +13,7 @@
     <link rel="stylesheet" type="text/css" href="~/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="~/assets/plugins/OwlCarousel2-2.2.1/animate.css">
 	<link rel="stylesheet" type="text/css" href="~/assets/styles/responsive.css">
-
-@*     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Shop_Bear.styles.css" asp-append-version="true" />
- *@</head>
+</head>
 <body>
 	<div class="super_container">
 
@@ -31,38 +27,13 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-6">
-							<div class="top_nav_left">free shipping on all u.s orders over $50</div>
+							<div class="top_nav_left"></div>
 						</div>
 						<div class="col-md-6 text-right">
 							<div class="top_nav_right">
 								<ul class="top_nav_menu">
 
-									<!-- Currency / Language / My Account -->
-
-									<li class="currency">
-										<a href="#">
-											usd
-											<i class="fa fa-angle-down"></i>
-										</a>
-										<ul class="currency_selection">
-											<li><a href="#">cad</a></li>
-											<li><a href="#">aud</a></li>
-											<li><a href="#">eur</a></li>
-											<li><a href="#">gbp</a></li>
-										</ul>
-									</li>
-									<li class="language">
-										<a href="#">
-											English
-											<i class="fa fa-angle-down"></i>
-										</a>
-										<ul class="language_selection">
-											<li><a href="#">French</a></li>
-											<li><a href="#">Italian</a></li>
-											<li><a href="#">German</a></li>
-											<li><a href="#">Spanish</a></li>
-										</ul>
-									</li>
+									
 									@if (User.Identity?.IsAuthenticated ?? false)
 									{
 										<li class="account">
@@ -102,17 +73,31 @@
 					<div class="row">
 						<div class="col-lg-12 text-right">
 							<div class="logo_container">
-								<a asp-action="Index" asp-controller="Home" style="color:green">BEAR WORKSHOP</a>
+								<a asp-action="Index" asp-controller="Home" style="color:green">TOYS WORKSHOP</a>
 							</div>
 							<nav class="navbar">
-								@Html.Partial("_MenuTopPartial")
+								<ul class="navbar_menu">
+									<li><a asp-action="Index" asp-controller="Home">Home</a></li>
+									<li><a asp-action="Index" asp-controller="News">News</a></li>
+									<li><a asp-action="Index" asp-controller="Products">Products</a></li>
+									<li><a asp-action="Index" asp-controller="Contact">Contact</a></li>
+									@if (User.Identity?.IsAuthenticated ?? false)
+									{
+										<li><a asp-action="Index" asp-controller="WishList">WishList</a></li>
+									}
+									else
+									{
+										<li><a asp-controller="Account" asp-action="Login">WishList</a></li>
+
+									}
+								</ul>
 								<ul class="navbar_user">
-									<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
-									<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+@* 									<li><a href="#"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+ *@									<li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
 									<li class="checkout">
 										<a asp-action="Index" asp-controller="Cart">
 											<i class="fa fa-shopping-cart" aria-hidden="true"></i>
-											<span  @* id="checkout_items" *@ class="checkout_items">0</span>
+											<span  @* id="checkout_items" *@ class="checkout_items">*</span>
 										</a>
 									</li>
 									
@@ -160,7 +145,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<div class="footer_nav_container">
-							<div class="cr">©2018 All Rights Reserverd. Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="#">Colorlib</a> &amp; distributed by <a href="https://themewagon.com">ThemeWagon</a></div>
+							<div class="cr">© 2018 Toys-Shop.</div>
 						</div>
 					</div>
 				</div>
@@ -178,11 +163,6 @@
     <script src="~/assets/plugins/easing/easing.js"></script>
     <script src="~/assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
     <script src="~/assets/js/custom.js"></script>
-@* 	<script src="~/assets/js/jsShopping.js"></script>
- *@
-@* 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
- *@    @await RenderSectionAsync("Scripts", required: false)
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

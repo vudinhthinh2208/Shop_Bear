@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Shop_Bear.Models;
 using Shop_Bear.Models.EF;
+using Shop_Bear.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,7 +34,7 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 
 
 
-
+builder.Services.AddSingleton<IVnPayService, VnPayService>();
 
 var app = builder.Build();
 app.UseSession();

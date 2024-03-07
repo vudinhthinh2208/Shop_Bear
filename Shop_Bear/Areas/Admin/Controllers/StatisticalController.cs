@@ -35,25 +35,27 @@ namespace Shop_Bear.Areas.Admin.Controllers
                         on o.Id equals od.OrderId
                         join p in _context.Products
                         on od.ProductId equals p.Id
+                        where o.Status == 1 || o.Status == 2
                         select new
                         {
                             CreatedDate = o.CreateDate,
                             Quantity = od.Quantity,
                             Price = od.Price,
-                            OriginalPrice = p.OriginalPrice
+                            OriginalPrice = p.OriginalPrice,
+							PriceSale = p.PriceSale
                         };
 
             var result = query.GroupBy(x => x.CreatedDate.Date).Select(x => new
             {
                 Date = x.Key,
-                TotalBuy = x.Sum(y => y.Quantity * y.OriginalPrice),
-                TotalSell = x.Sum(y => y.Quantity * y.Price),
+                TotalBuy = x.Sum(y => y.Quantity * y.PriceSale),
+                TotalSell = x.Sum(y => y.Quantity * y.OriginalPrice),
             }).Select(x => new StatisticalViewModel
             {
                 Date = x.Date,
                 DoanhThu = (decimal)x.TotalBuy,
-                LoiNhuan = (decimal)x.TotalSell - (decimal)x.TotalBuy
-            }).ToList();
+                LoiNhuan = (decimal)x.TotalBuy - (decimal)x.TotalSell
+			}).ToList();
 
             return result;
         }
@@ -62,19 +64,21 @@ namespace Shop_Bear.Areas.Admin.Controllers
 			var query = from o in _context.Orders
 						join od in _context.OrderDetails on o.Id equals od.OrderId
 						join p in _context.Products on od.ProductId equals p.Id
-						where o.CreateDate.Year == year
-						select new
+						where o.CreateDate.Year == year && (o.Status == 1 || o.Status == 2)
+                        select new
 						{
 							CreatedDate = o.CreateDate,
 							Quantities = od.Quantity,
 							Prices = od.Price,
-							OriginalPrices = p.OriginalPrice
+                            PriceSale = p.PriceSale,
+
+                            OriginalPrices = p.OriginalPrice
 						};
 
 			var result = query.GroupBy(x => x.CreatedDate.Month).Select(x => new
 			{
 				Month = x.Key,
-				TotalBuy = x.Sum(y => y.Quantities * y.Prices),
+				TotalBuy = x.Sum(y => y.Quantities * y.PriceSale),
 				TotalSell = x.Sum(y => y.Quantities * y.OriginalPrices),
 			}).Select(x => new StatisticalViewModel
 			{

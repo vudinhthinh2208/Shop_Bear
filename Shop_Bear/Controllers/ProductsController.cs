@@ -15,7 +15,7 @@ namespace Shop_Bear.Controllers
 		}
 		public async Task<IActionResult> Index()
 		{
-			IEnumerable<Product> items = await _context.Products
+			IEnumerable<Product> items = await _context.Products.Where(x => x.IsActive == true)
 					.Include(p => p.ProductImage).Include(p => p.ProductCategory).ToListAsync();
 
 			return View(items);

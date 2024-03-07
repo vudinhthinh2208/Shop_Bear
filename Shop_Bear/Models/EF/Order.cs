@@ -32,6 +32,7 @@ namespace Shop_Bear.Models.EF
         public int TypePayment { get; set; }
         public int Status { get; set; }
         public DateTime CreateDate {  get; set; }
+        public DateTime DatePayment {  get; set; }
         public ICollection<OrderDetail> OrderDetails { get;}
     }
 }

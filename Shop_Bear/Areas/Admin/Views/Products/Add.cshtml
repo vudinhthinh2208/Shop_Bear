@@ -66,11 +66,7 @@
 											@Html.TextBoxFor(x => x.Title, new { @class = "form-control", @placeholder = "Tên sản phẩm" })
 											@Html.ValidationMessageFor(x => x.Title, null, new { @class = "text-danger" })
 										</div>
-										<div class="form-group">
-											<label for="exampleInputEmail1">Alias</label>
-											@Html.TextBoxFor(x => x.Alias, new { @class = "form-control", @placeholder = "Alias" })
-											@Html.ValidationMessageFor(x => x.Alias, null, new { @class = "text-danger" })
-										</div>
+										
 										<div class="form-group">
 											<label for="exampleInputEmail1">SKU</label>
 											@Html.TextBoxFor(x => x.Code, new { @class = "form-control", @placeholder = "Mã sản phẩm" })
@@ -121,6 +117,7 @@
 												</div>
 											</div>
 										</div>
+										
 										<div class="row">
 											<div class="col-4">
 												<div class="form-group">
@@ -210,13 +207,13 @@
 												<input type="hidden" id="tCurrentId" value="0" />
 											</div>
 										</div>
-
+										<div class="form-group">
+											<a asp-controller="Products" asp-action="Index" class="btn btn-danger">Quay lại</a>
+											<button type="submit" class="btn btn-primary">Submit</button>
+										</div>
 									</div>
 								</div>
-								<div class="form-group">
-									<a asp-controller="Products" asp-action="Index" class="btn btn-danger">Quay lại</a>
-									<button type="submit" class="btn btn-primary">Submit</button>
-								</div>
+								
 							</div>
 
 						</div>
@@ -273,6 +270,27 @@
 				});
 
 				// Hàm định dạng giảm giá
+				function formatPrice(price) {
+					// Loại bỏ tất cả các ký tự không phải số
+					var numericPrice = price.replace(/[^0-9]/g, '');
+
+					// Định dạng giá theo hàng trăm hàng nghìn
+					var formattedPrice = numericPrice.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+
+					return formattedPrice;
+				}
+				$('#OriginalPrice').on('input', function () {
+					// Lấy giá trị nhập vào
+					var priceInput = $(this).val();
+
+					// Xử lý định dạng giá
+					var formattedPrice = formatPrice(priceInput);
+
+					// Gán giá trị đã định dạng vào trường nhập
+					$(this).val(formattedPrice);
+				});
+
+				// Hàm định dạng giá gốc
 				function formatPrice(price) {
 					// Loại bỏ tất cả các ký tự không phải số
 					var numericPrice = price.replace(/[^0-9]/g, '');

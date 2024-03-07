@@ -1,27 +1,47 @@
 ﻿@model IEnumerable<Shop_Bear.Models.EF.Product>
+
 @if (Model != null && Model.Any())
 {
 	@foreach (var item in Model)
 	{
-
+        var sale = ((@item.Price - @item.PriceSale) * 100) / @item.Price;
+        var saleFormatted = $"{sale:N2}";
 		<a asp-action="Detail" asp-controller="Products" asp-route-Alias="@item.Alias">
 			<div class="product-item men">
 				<div class="product discount product_filter">
 					<div class="product_image">
-						<img src="@item.ProductImage.FirstOrDefault(x => x.IsDefault).Image" alt="">
+						<img src="@item.ProductImage.FirstOrDefault(x => x.IsDefault).Image" 
+							 alt="">
 
 					</div>
-					<div class="favorite favorite_left"></div>
-					<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-$20</span></div>
+					<div >
+						<form method="post" asp-action="PostWishList" asp-controller="WishList">
+							<input type="hidden" name="id" value="@item.Id" />
+							<button type="submit" class="favorite favorite_left" title="Add to wishlist" style="border: none; background: none;position: absolute;">
+							</button>
+						</form>
+					</div>
+					@if(item.IsSale == true)
+					{
+						<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-@saleFormatted%</span></div>
+					}
+					else if(item.IsHot == true)
+					{
+						<div class="product_bubble product_bubble_left product_bubble_green d-flex flex-column align-items-center"><span>new</span></div>
+					}
+					else
+					{
+						<div class="product_bubble product_bubble_right product_bubble_red d-flex flex-column align-items-center"><span>-@saleFormatted%</span></div>
+
+					}
 					<div class="product_info">
-						<h6 class="product_name"><a href="single.html">@item.Title</a></h6>
+                        <h6 class="product_name"><a asp-action="Detail" asp-controller="Products" asp-route-Alias="@item.Alias">@item.Title</a></h6>
 						<div class="product_price">@item.PriceSale<span>@item.Price</span></div>
 					</div>
 				</div>
-				<div class="red_button add_to_cart_button"><a href="#" class="btnAddToCart" data-id="@item.Id">add to cart</a></div>
+				<div class="red_button add_to_cart_button"><a asp-action="Add" asp-controller="Cart" asp-route-Id="@item.Id" class="btnAddToCart" data-id="@item.Id">add to cart</a></div>
 			</div>
 		</a>
 	}
 
 }
-

@@ -3,6 +3,7 @@
 }
 <link rel="stylesheet" type="text/css" href="~/assets/styles/main_styles.css">
 
+<link rel="stylesheet" type="text/css" href="~/assets/styles/style.css">
 <!-- Slider -->
 
 <div class="main_slider" style="background-image: url('/assets/images/banner_stor.jpg');">
@@ -14,16 +15,16 @@
 					<h6></h6>
 					<br />
 					<br />
-					<h1>BEAR STORE</h1>
-					<div class="red_button shop_now_button"><a href="#">shop now</a></div>
+					<h1>Toys-Shop</h1>
+					<div class="red_button shop_now_button"><a asp-controller="Products">shop now</a></div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 <!-- Banner -->
-@Html.Partial("_MenuProductCategoryPartial")
-<!-- New Arrivals -->
+@* @Html.Partial("_MenuProductCategoryPartial")
+ *@<!-- New Arrivals -->
 
 <div class="new_arrivals">
 	<div class="container">
@@ -31,79 +32,99 @@
 	</div>
 </div>
 
-<!-- Deal of the week -->
-
-<div class="deal_ofthe_week">
-	<div class="container">
-		<div class="row align-items-center">
-			<div class="col-lg-6">
-				<div class="deal_ofthe_week_img">
-					<img src="images/deal_ofthe_week.png" alt="">
-				</div>
-			</div>
-			<div class="col-lg-6 text-right deal_ofthe_week_col">
-				<div class="deal_ofthe_week_content d-flex flex-column align-items-center float-right">
-					<div class="section_title">
-						<h2>Deal Of The Week</h2>
-					</div>
-					<ul class="timer">
-						<li class="d-inline-flex flex-column justify-content-center align-items-center">
-							<div id="day" class="timer_num">03</div>
-							<div class="timer_unit">Day</div>
-						</li>
-						<li class="d-inline-flex flex-column justify-content-center align-items-center">
-							<div id="hour" class="timer_num">15</div>
-							<div class="timer_unit">Hours</div>
-						</li>
-						<li class="d-inline-flex flex-column justify-content-center align-items-center">
-							<div id="minute" class="timer_num">45</div>
-							<div class="timer_unit">Mins</div>
-						</li>
-						<li class="d-inline-flex flex-column justify-content-center align-items-center">
-							<div id="second" class="timer_num">23</div>
-							<div class="timer_unit">Sec</div>
-						</li>
-					</ul>
-					<div class="red_button deal_ofthe_week_button"><a href="#">shop now</a></div>
-				</div>
-			</div>
+<section class="latest py-lg-4 py-md-3 py-sm-3 py-3">
+	<div class="container py-lg-5 py-md-5 py-sm-4 py-3">
+		<h3 class="title text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">Latest Toys</h3>
+		<div class=" img-toy-w3l-top">
 		</div>
-	</div>
-</div>
+		<div class="mt-lg-4 mt-3 product-info-img">
+			<p>
+				Hop for Joy: Our NEW Easter Friends Are Here for Springtime Fun!
 
-<!-- Best Sellers -->
-
-<div class="best_sellers">
-	<div class="container">
-		<div class="row">
-			<div class="col text-center">
-				<div class="section_title new_arrivals_title">
-					<h2>Best Sellers</h2>
-				</div>
+			</p>
+			<div class="clients_more-buttn">
+				<a asp-controller="Products" asp-action="Index">Shop Now</a>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col">
-				<div class="product_slider_container">
-					<div class="owl-carousel owl-theme product_slider">
+			<div class="col-lg-6 img-toy-w3l-left">
+				<div class="toys-img-one">
+				</div>
+				<div class="mt-lg-4 mt-3 product-info-img">
+					<p>
+						Cool Beans! Mini Beans Friends Bring Huge Amounts of Fun
 
-						<!-- Slide 1 -->
-						@Html.Partial("_MenuProductPartial")
+					</p>
+					<div class="clients_more-buttn">
+						<a asp-controller="Products" asp-action="Index">Shop Now</a>
 					</div>
-
-					<!-- Slider Navigation -->
-
-					<div class="product_slider_nav_left product_slider_nav d-flex align-items-center justify-content-center flex-column">
-						<i class="fa fa-chevron-left" aria-hidden="true"></i>
+				</div>
+			</div>
+			<div class="col-lg-6 img-toy-agile-right">
+				<div class="toys-img-one-two">
+				</div>
+				<div class="mt-lg-4 mt-3 product-info-img">
+					<p>
+						Explore Everything from Trending Characters to Cuddly Classics
+					</p>
+					<div class="clients_more-buttn">
+						<a asp-controller="Products" asp-action="Index">Shop Now</a>
 					</div>
-					<div class="product_slider_nav_right product_slider_nav d-flex align-items-center justify-content-center flex-column">
-						<i class="fa fa-chevron-right" aria-hidden="true"></i>
+				</div>
+				<div class="toys-img-one-three">
+				</div>
+				<div class="mt-lg-4 mt-3 product-info-img">
+					<p>
+						Go on Fun Adventures With Disney Winnie the Pooh and Eeyore!
+					</p>
+					<div class="clients_more-buttn">
+						<a asp-controller="Products" asp-action="Index">Shop Now</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
+</section>
+
+
+<!--//Product-view-->
+<section class="premium py-lg-4 py-md-3 py-sm-3 py-3">
+	<div class="container py-lg-5 py-md-5 py-sm-4 py-3">
+		<h3 class="title clr text-center mb-lg-5 mb-md-4 mb-sm-4 mb-3">Premium Toys</h3>
+		<div class="row">
+			<div class="col-lg-6 agileits-toys-left"></div>
+			<div class="col-lg-6 agileits-toys-right">
+				<div class="sub-agile-info-toys">
+					<p>
+						The plush teddy bear sat on the shelf, its soft fur inviting to touch.
+						With its gentle eyes and stitched smile, it held stories of countless cuddles
+						and whispered secrets, a steadfast companion in childhood adventures.
+					</p>
+					<div class="clients_more-buttn">
+						<a asp-controller="Products" asp-action="Index" class="mb-0">Shop Now</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row mt-lg-4 mt-md-4 mt-3">
+			<div class="col-lg-6 agileits-toys-right">
+				<div class="sub-agile-info-toys">
+					<p>
+						Nestled among colorful toys, the teddy bear stood out with its timeless charm.
+						Its plushy embrace offered solace in moments of sadness and joy in times of play. 
+						A cherished friend, it shared in laughter and wiped away tears, a symbol of comfort and love.
+					</p>
+					<div class="clients_more-buttn ">
+						<a asp-controller="Products" asp-action="Index" class="mb-0">Shop Now</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6 agileits-toys-left"></div>
+		</div>
+	</div>
+</section>
+
+
 
 <!-- Benefit -->
 
@@ -142,7 +163,7 @@
 					<div class="benefit_icon"><i class="fa fa-clock-o" aria-hidden="true"></i></div>
 					<div class="benefit_content">
 						<h6>opening all week</h6>
-						<p>8AM - 09PM</p>
+						<p>8AM - 5PM</p>
 					</div>
 				</div>
 			</div>

@@ -37,7 +37,29 @@ namespace Shop_Bear.Areas.Admin.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
-        [HttpPost]
+		public ActionResult Edit(int id)
+		{
+			var item = _context.ProductCategories.Find(id);
+			return View(item);
+		}
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public ActionResult Edit(ProductCategory model)
+		{
+			_context.Attach(model);
+			model.ModifiedDate = DateTime.Now;
+			model.Alias = Shop_Bear.Models.Common.Filter.FilterChar(model.Title);
+			_context.Entry(model).Property(x => x.Title).IsModified = true;
+			_context.Entry(model).Property(x => x.Description).IsModified = true;
+			_context.Entry(model).Property(x => x.Alias).IsModified = true;
+			_context.Entry(model).Property(x => x.SeoDescription).IsModified = true;
+			_context.Entry(model).Property(x => x.SeoKeywords).IsModified = true;
+			_context.Entry(model).Property(x => x.SeoTitle).IsModified = true;
+			_context.Entry(model).Property(x => x.ModifiedDate).IsModified = true;
+			_context.SaveChanges();
+			return RedirectToAction("Index");
+		}
+		[HttpPost]
         public ActionResult Delete(int id)
         {
             var item = _context.ProductCategories.Find(id);

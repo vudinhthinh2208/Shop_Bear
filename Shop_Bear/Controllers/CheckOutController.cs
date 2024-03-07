@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Shop_Bear.Models;
 using Shop_Bear.Models.EF;
+using Shop_Bear.Models.ViewModels;
 using Shop_Bear.Repository;
+using Shop_Bear.Services;
 using System.Security.Claims;
 
 namespace Shop_Bear.Controllers
@@ -12,9 +14,11 @@ namespace Shop_Bear.Controllers
 	{
 		
 		private readonly ShopBearContext _context;
-        public CheckOutController(ShopBearContext context)
+		private readonly IVnPayService _vpnPayService;
+        public CheckOutController(ShopBearContext context, IVnPayService vnPayService)
         {
 			_context = context;
+			_vpnPayService = vnPayService;
         }
 		public IActionResult Index()
 		{
@@ -30,13 +34,24 @@ namespace Shop_Bear.Controllers
 			
 				if(ModelState.IsValid)
 				{
+					
 					List<CartItemModel> cartItems = HttpContext.Session.GetJson<List<CartItemModel>>("Cart") ?? new List<CartItemModel>();
 					var ordercode = Guid.NewGuid().ToString();
 					orderItem.Code = ordercode;
 					orderItem.Status = 1;
 					orderItem.CreateDate = DateTime.Now;
-					orderItem.TypePayment = TypePayment;
 					orderItem.TotalAmount = cartItems.Sum(x => x.Quantity * x.Price);
+					if (TypePayment == 2)
+					{
+						var vnPayModel = new VnPaymentRequestModel
+						{
+							Amount = 300000,
+							CreatedDate = DateTime.Now,
+							OrderId = orderItem.Id,
+						};
+						return Redirect(_vpnPayService.CreatePaymentUrl(HttpContext, vnPayModel));
+					}
+					orderItem.TypePayment = TypePayment;
 					_context.Add(orderItem);
 					await _context.SaveChangesAsync();
 				foreach (var cart in cartItems)
@@ -57,5 +72,22 @@ namespace Shop_Bear.Controllers
 				return View(orderItem);
 			
 		}
-	}
+		public IActionResult PaymentFail()
+		{
+			return View();
+		}
+		public IActionResult PaymentCallBack()
+		{
+			var responce = _vpnPayService.PaymentExecute(Request.Query);
+			if(responce == null || responce.VnPayResponseCode != "00")
+			{
+				TempData["Message"] = $"Lỗi thanh toán VNPAY";
+				return RedirectToAction("PaymentFail");
+			}
+			
+				TempData["success"] = "Thanh toán VNPAY thành công";
+				return RedirectToAction("Index", "Cart");
+		}
+
+    }
 }

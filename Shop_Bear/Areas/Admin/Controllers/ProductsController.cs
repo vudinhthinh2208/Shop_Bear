@@ -78,8 +78,8 @@ namespace Shop_Bear.Areas.Admin.Controllers
             }
 			model.CreateDate = DateTime.Now;
             model.ModifiedDate = DateTime.Now;
-            model.Alias = Shop_Bear.Models.Common.Filter.FilterChar(model.Title);
-            model.ViewCount = 0;
+			model.ViewCount = 1;
+			model.Alias = Shop_Bear.Models.Common.Filter.FilterChar(model.Title);
             _context.Products.Add(model);
             _context.SaveChanges();
             ViewBag.ProductCategory = new SelectList(_context.ProductCategories.ToList(), "Id", "Title");
@@ -97,6 +97,7 @@ namespace Shop_Bear.Areas.Admin.Controllers
 		{
 			model.ModifiedDate = DateTime.Now;
 			model.Alias = Shop_Bear.Models.Common.Filter.FilterChar(model.Title);
+            model.ViewCount = model.ViewCount;
             _context.Update(model);
 			_context.SaveChanges();
 			return RedirectToAction("Index");

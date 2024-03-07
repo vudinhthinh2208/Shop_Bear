@@ -49,5 +49,6 @@ namespace Shop_Bear.Models
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<Subscribe> Subscribes { get; set; }
         public DbSet<ThongKe> ThongKes { get; set; }
+        public DbSet<WishList> WishLists { get; set; }
 }
 }

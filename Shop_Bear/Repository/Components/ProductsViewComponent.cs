@@ -14,8 +14,7 @@ namespace Shop_Bear.Repository.Components
 		}
 		public async Task<IViewComponentResult> InvokeAsync()
 		{
-			// Assuming categoryId is passed as a parameter when invoking the view component
-			IEnumerable<Product> items = await _context.Products
+			IEnumerable<Product> items = await _context.Products.Where(x => x.IsActive == true && x.IsHome == true)
 					.Include(p => p.ProductImage).ToListAsync();
 
 			return View(items);
